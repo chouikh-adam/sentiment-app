@@ -2,7 +2,7 @@
 
 **Module :** Développement et déploiement d'applications intelligentes — semaine 1
 **Auteur :** Adam Chouikh
-**Dépôt :** https://github.com/adam2005chouikh-ctrl/sentiment-app
+**Dépôt :** https://github.com/chouikh-adam/sentiment-app
 
 ---
 
