@@ -8,21 +8,28 @@ Usage :
 import sys
 from functools import lru_cache
 from pathlib import Path
+from typing import TypedDict
 
 import joblib
 
 MODELE = Path(__file__).resolve().parents[1] / "models" / "sentiment.joblib"
 
 
+class Prediction(TypedDict):
+    """Sortie de predict() : étiquette du modèle et confiance de la classe prédite."""
+    label: str
+    score: float
+
+
 @lru_cache(maxsize=1)
 def charger_modele():
-    """Chargé une seule fois par processus, pas à chaque appel."""
+    """Charge une seule fois par processus, pas à chaque appel."""
     if not MODELE.exists():
         raise FileNotFoundError("models/sentiment.joblib absent : lancez python src/train.py")
     return joblib.load(MODELE)
 
 
-def predict(texte: str) -> dict:
+def predict(texte: str) -> Prediction:
     """Renvoie {'label': 'positive'|'negative', 'score': float}."""
     if not isinstance(texte, str) or not texte.strip():
         raise ValueError("texte vide")

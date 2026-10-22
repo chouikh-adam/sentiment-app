@@ -1,0 +1,21 @@
+text,attendu,difficulte,erreur_connue
+"Commande reçue en deux jours, emballage soigné",POSITIVE,,
+"Pas déçu du tout, je recommande",POSITIVE,négation,
+"Arrivé cassé, bravo le transporteur",NEGATIVE,ironie,
+"Produit conforme, livraison rapide, rien à redire",POSITIVE,,
+"Qualité médiocre, il a lâché au bout d'une semaine",NEGATIVE,,
+"Excellent rapport qualité-prix, je rachèterai",POSITIVE,,
+"Service client injoignable, commande jamais arrivée",NEGATIVE,,
+"Je pensais être déçu, mais finalement très bon produit",POSITIVE,avis mitigé,
+"Très bon produit, sauf que la livraison a pris trois semaines",NEGATIVE,avis mitigé,
+"Le film traîne en longueur, mais la fin rattrape tout",POSITIVE,autre domaine,
+"Un chef-d'œuvre, à voir absolument",POSITIVE,autre domaine,
+"Scénario vide et acteurs fades, je me suis ennuyé",NEGATIVE,autre domaine,"hors domaine (cinéma) : le vocabulaire produit ne couvre pas « scénario » ni « acteurs », la négation est ignorée"
+"Fonctionne bien, mais la notice est incompréhensible",NEGATIVE,avis mitigé,
+"Emballage abîmé, produit intact : ouf",POSITIVE,avis mitigé,
+"Je ne le recommande pas du tout",NEGATIVE,négation,"négation absente du sac de mots : « recommande » pèse plus que « ne ... pas »"
+"Rien à signaler, tout est parfait",POSITIVE,,
+"Trop cher pour ce que c'est",NEGATIVE,,
+"Livraison en avance et produit de qualité",POSITIVE,,
+"Il a cessé de fonctionner après deux jours, quelle déception",NEGATIVE,,
+"Bon produit dans l'ensemble, malgré quelques rayures",POSITIVE,avis mitigé,
