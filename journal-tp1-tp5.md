@@ -110,3 +110,18 @@ immédiatement le contrôle T2 sur les fiches), puis les paquets cœur (`pandas`
 **Ce qui reste à faire, et qui n'appartient qu'au binôme :** le test d'historique Git exige **deux auteurs de
 commits** distincts. Le membre B doit cloner le dépôt, compléter sa ligne du tableau dans `README.md` et pousser
 son propre commit ; le compte `38 passed` est alors atteint, et la CI passe au vert.
+
+## Deux points qui restent ouverts
+
+1. **L'auteur unique.** `tests/test_git_history.py` exige deux auteurs de commits : c'est le commit du membre B
+   qui le rendra vert. Aucune identité n'a été inventée de notre côté pour le faire passer artificiellement.
+2. **La CI ne démarre pas sur ce compte.** GitHub refuse de lancer les runners sur le compte
+   `chouikh-adam` :
+
+   > `The job was not started because your account is locked due to a billing issue.`
+
+   Ce n'est pas un défaut du dépôt : le workflow `.github/workflows/ci.yml` est identique à celui du kit et
+   s'exécute correctement dès que le compte n'est plus verrouillé. En attendant, la même vérification a été
+   faite **en local sur un clone frais** (`git clone` + `pip install pandas scikit-learn pytest` +
+   `check_setup.py` + `pytest -q`) : **0 erreur(s), 37 passed, 1 failed** — le même résultat que la CI aurait
+   donné, et le dépôt tient donc debout tout seul sur une machine vierge.
