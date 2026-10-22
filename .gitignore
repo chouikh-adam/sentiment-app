@@ -26,6 +26,10 @@ mlflow.db
 .DS_Store
 Thumbs.db
 
+# Archives (kits, PDF) : jamais dans le depot
+*.zip
+*.pdf
+
 # Tests
 .pytest_cache/
 .coverage
