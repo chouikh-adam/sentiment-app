@@ -526,7 +526,7 @@ Success: no issues found in 4 source files
 ```text
 FAILED tests/test_limites.py::test_frontieres_du_contrat[texte-blancs]
 FAILED tests/test_limites.py::test_propriete_texte_blanc - assert 500 == 422
-Falsifying example: texte=' '
+Falsifying example: texte='\xa0'
 2 failed, 8 passed
 ```
 
@@ -546,8 +546,11 @@ detail=[{"loc": ["body", "text"], "msg": "...", "type": "value_error"}]
 > `HTTPException(422, detail=str)`, qui produit un `detail` en **chaîne**, soit par la panne 500 une fois la
 > conversion supprimée au T26. Deux formes de 422 pour la même faute, c'est illisible pour l'interface du
 > TP5, qui n'a qu'un seul message « Texte refusé » à afficher. Le `field_validator` du schéma applique la
-> même règle que `predict()` (`str.strip()`) : hypothesis a trouvé le plus petit contre-exemple, un seul
-> espace.
+> même règle que `predict()` (`str.strip()`) : hypothesis a trouvé le plus petit contre-exemple, une espace
+> insécable `\xa0`, exactement la famille de `\x85` du guide. Mon premier alphabet ne contenait que les
+> blancs ASCII : il ne pouvait pas trouver ce cas. La propriété tire maintenant ses caractères des
+> catégories Unicode `Zs`, `Zl`, `Zp` (les contrôles `Cc`, comme `\x7f`, sont donc exclus : `str.strip()`
+> ne les retire pas).
 
 ![T22 : refus des espaces](captures/tp4-t22-espaces.png)
 
@@ -567,7 +570,8 @@ essai 3 : 10 passed
 
 > Les huit cas paramétrés plus les deux propriétés (texte valide → 200 et label du contrat ; texte de
 > blancs → 422 standard) passent trois fois de suite, avec `settings(deadline=None)` comme le guide le
-> recommande.
+> recommande. La propriété « blancs » tire ses caractères des catégories Unicode `Zs`/`Zl`/`Zp` : elle
+> couvre donc aussi l'espace insécable et les blancs larges, pas seulement l'espace ASCII.
 
 ![T23 : propriétés vertes](captures/tp4-t23-proprietes.png)
 

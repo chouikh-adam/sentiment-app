@@ -69,10 +69,14 @@ def test_propriete_texte_valide(client, texte):
     assert 0.0 <= corps["score"] <= 1.0
 
 
+BLANCS = st.characters(whitelist_categories=("Zs", "Zl", "Zp"))
+
+
 @settings(deadline=None)
-@given(st.text(alphabet=" \t\r\n\f\v", min_size=1, max_size=2000))
+@given(st.text(alphabet=BLANCS, min_size=1, max_size=2000))
 def test_propriete_texte_blanc(client, texte):
-    """Tout texte fait uniquement de blancs est refusé sous la forme standard."""
+    """Tout texte fait uniquement de blancs (au sens de str.strip()) est refusé, forme standard."""
+    assert texte and not texte.strip()  # pré-condition : ce que str.strip() considère blanc
     reponse = client.post("/predict", json={"text": texte})
     assert reponse.status_code == 422
     detail = reponse.json()["detail"]
