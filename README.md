@@ -1,75 +1,67 @@
-# sentiment-app : dépôt du binôme
+# sentiment-app
 
-Application fil rouge du cours *Développement et déploiement d'applications intelligentes*.
-Ce dépôt grandit chaque semaine ; la semaine 1 met en place le cadrage et l'environnement. Rien n'est jeté.
+Application fil rouge du cours *Développement et déploiement d'applications intelligentes*,
+menée jusqu'au TP5 : cadrage, modèle de sentiment, API FastAPI, tests approfondis et interface
+Streamlit.
 
-## Démarrage rapide
+## Démarrage
 
-```bash
+Python 3.11 ou plus récent (testé avec 3.12.10).
+
+```powershell
 python -m venv .venv
-source .venv/bin/activate        # Windows PowerShell : .venv\Scripts\Activate.ps1
+.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+python src/make_demo.py      # jeu de démonstration (reproductible, sans réseau)
+python src/train.py          # entraîne models/sentiment.joblib
+pytest -q
 ```
 
-Puis vérifiez :
+Lancer l'API :
 
-```bash
-python scripts/check_setup.py    # diagnostic lisible : versions, dossiers, Git, fiches
-pytest -q                        # les mêmes vérifications, sous forme de tests
+```powershell
+uvicorn api.main:app --reload
 ```
 
-**Au premier lancement, `pytest` affiche `3 failed, 31 passed, 4 skipped` : c'est normal.** Les trois échecs sont les fiches de cadrage encore vides, les quatre tests ignorés attendent que le dépôt Git existe. En fin de TP, la même commande affiche `38 passed`.
+Documentation interactive sur <http://127.0.0.1:8000/docs>.
 
-Les scripts `scripts/setup.sh` (Linux, macOS, Git Bash) et `scripts/setup.ps1` (Windows) font l'installation et le diagnostic en une commande.
+Lancer l'interface :
 
-## Par où commencer
-
-| Fichier | Quand le lire |
-| --- | --- |
-| `MARCHE-A-SUIVRE.md` | Pendant la séance : huit étapes, huit contrôles, les résultats attendus |
-| `TP1-ENONCE.md` | L'énoncé du TP : objectifs, livrables, grille de notation |
-| `TESTS.md` | La démarche de test en détail, et les trois états de référence |
-| `AIDE-GIT.md` | Les commandes Git du TP et la résolution d'un conflit |
-| `DEPANNAGE.md` | Quand quelque chose échoue |
-| `docs/cadrage/GRILLE-DE-DECISION.md` | Pendant la partie A, pour remplir les fiches |
-| `exemples/README.md` | Après le TP, pour voir à quoi ressembleront les semaines 2 et 5 |
-
-## Raccourcis
-
-Sous Linux, macOS et Git Bash, un `Makefile` évite de retaper les commandes :
-
-```bash
-make setup          # venv, dépendances, diagnostic
-make check          # diagnostic seul
-make test           # les 38 tests
-make test-cadrage   # les 12 tests des fiches
-make verif URL=https://github.com/<organisation>/sentiment-app.git
-make exemple-ml     # entraîne le modèle d'exemple (facultatif)
-make help           # la liste complète
+```powershell
+streamlit run ui/app.py
 ```
 
 ## Structure
 
 ```text
 sentiment-app/
-├── README.md, MARCHE-A-SUIVRE.md, TP1-ENONCE.md, TESTS.md, AIDE-GIT.md, DEPANNAGE.md
-├── Makefile              # raccourcis (optionnel)
-├── requirements.txt      # dépendances du semestre, versions figées
-├── .gitignore, .env.example, .editorconfig, pytest.ini
-├── .vscode/              # interpréteur et tests préconfigurés
-├── data/                 # jeux de données (DVC à partir de la semaine 7)
-├── models/               # modèles entraînés (jamais dans Git)
-├── app/                  # API FastAPI (semaine 3)
-├── ui/                   # interface Streamlit (semaine 5)
-├── tests/                # pytest : 23 + 12 + 3 = 38 tests en semaine 1
-├── scripts/              # setup, diagnostic, création de fiche, init du dépôt, clone de vérification
-├── notebooks/            # variante Colab du TP1
-└── docs/cadrage/         # fiches de cadrage, exemple corrigé, grille, banque de cas
+├── api/                  # API FastAPI : /health, /predict
+├── src/                  # démonstration, entraînement, évaluation, prédiction, seuil, bilan
+├── ui/                   # interface Streamlit
+├── data/                 # jeu d'or (20 avis) et avis d'exemple
+├── models/               # metrics.json (le modèle .joblib reste local, jamais versionné)
+├── tests/                # tests TP1 à TP5
+├── docs/                 # cadrage, comptes rendus, journal et captures
+├── scripts/              # installation et diagnostic
+├── .github/workflows/    # CI : tests, couverture, ruff, mypy
+├── pyproject.toml        # ruff, mypy, couverture
+└── .pre-commit-config.yaml
 ```
 
-## Membres du binôme
+## Résultats
 
-| Rôle | Nom | Identifiant GitHub | Travail de la semaine 1 |
-| --- | --- | --- | --- |
-| Membre A | Adam Chouikh | [@chouikh-adam] | Remplissage des fiches de cadrage, mise en place de l'environnement |
-| Membre B | [Nom 2] | [@login] | |
+| Étape | Résultat |
+| --- | --- |
+| Modèle de démonstration | F1 = 0,879 (58 avis de test) |
+| Modèle Allociné | F1 = 0,920 (20 000 avis) |
+| Couverture de `api/` | 98,86 % (seuil 95 %) |
+| `ruff` / `mypy` | aucun problème |
+| `pytest` | 94 passed, 2 xfailed, 1 failed |
+
+Le test `test_each_member_has_committed` attend deux auteurs de commits : ce dépôt est un
+travail individuel, il reste donc rouge. Les deux `xfail` sont deux erreurs franches connues
+du jeu d'or (négation et hors-domaine), documentées dans `docs/journal-tp1-tp5.md`.
+
+## Auteur
+
+Adam Chouikh — [@chouikh-adam](https://github.com/chouikh-adam)

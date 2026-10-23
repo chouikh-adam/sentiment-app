@@ -11,11 +11,8 @@ build/
 
 # Artefacts lourds (DVC et MLflow à partir de la semaine 7)
 models/*
-!models/.gitkeep
 !models/metrics.json
 data/*
-!data/.gitkeep
-!data/sample_reviews.csv
 mlruns/
 mlflow.db
 
