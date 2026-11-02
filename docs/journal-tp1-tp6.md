@@ -1,4 +1,4 @@
-# Journal de bord du binôme : TP1 à TP6
+# Journal de bord (travail individuel) : TP1 à TP6
 
 **Module** : Développement et déploiement d'applications intelligentes · **Enseignant** : A. Larhlimi
 
@@ -10,6 +10,8 @@
 **Dépôt** : [https://github.com/chouikh-adam/sentiment-app](https://github.com/chouikh-adam/sentiment-app)
 
 > Travail réalisé seul par Adam Chouikh : les tâches « membre A » et « membre B » ont été effectuées par le même étudiant. Les captures « membre B » sont obtenues après `git pull` sur le même poste, et les blocs prévus pour le binôme sont marqués « Non applicable / travail individuel ».
+
+> **État du dépôt** : version déposée avant la date limite, journal partiellement complété. Les commentaires marqués « À compléter » et les captures TP6 (T35 à T41, membre B) seront ajoutés dans une version ultérieure. Les sorties présentes sont celles observées sur mon poste. Les blocs T4 et T7 (TP1) n'ont pas pu être rejoués faute d'espace disque, et T35 (TP6) faute du kit appliquer_tp6.py, absent du poste.
 
 ## Comment remplir ce journal
 
@@ -66,14 +68,14 @@ git config --global user.name
  -V:3.12          Python 3.12 (64-bit)
 git version 2.55.0.windows.5
 chouikh-adam
-Python 3.12.10 (utilisé via py -3.12, environnement .venv en 3.12.10)
+Python 3.12.10
 ```
 
-- [x] Conforme
+- [ ] Conforme
 
 **Commentaire** :
 
-> Python 3.11 n'était pas installé sur ce poste (seuls 3.12 et 3.14). Le travail a été mené en Python 3.12.10 dans l'environnement virtuel `.venv`, ce qui est fonctionnel avec le jeu de dépendances du cours.
+> Écart : Python 3.11 n'était pas installé sur ce poste (seuls 3.14 et 3.12 apparaissent dans `py -0`). Toutes les commandes en `py -3.11` ont été rejouées avec `py -3.12`. La ligne `Python 3.12.10` ci-dessus est la sortie réelle de `py -3.12 --version`. Le travail a été mené dans l'environnement virtuel `.venv` en 3.12.10.
 
 ![Poste du membre A](captures/tp0-poste-membre-a.png)
 
@@ -121,10 +123,23 @@ Get-ChildItem -Force
 **Obtenu** :
 
 ```
-À compléter
+d----- .github
+d----- api
+d----- app
+d----- data
+d----- docs
+d----- models
+d----- scripts
+d----- sentiment_app
+d----- src
+d----- tests
+d----- ui
+-a---- .gitignore
 ```
 
-- [ ] Conforme
+*(sortie à l'état final du dépôt (TP6) : dossiers supplémentaires `build`, `dist`, `sentiment_app.egg-info`, caches et `.venv`)*
+
+- [x] Conforme
 
 **Commentaire** :
 
@@ -151,8 +166,12 @@ python -m pytest -q
 **Obtenu** (version de Python, résumé du diagnostic, dernière ligne de pytest) :
 
 ```
-À compléter
+Python 3.12.10
+Résultat : 0 erreur(s), 2 avertissement(s)
+1 failed, 94 passed, 2 xfailed
 ```
+
+*(résultat à l'état final du dépôt (TP6) ; l'état de départ annoncé, `3 failed, 31 passed, 4 skipped`, n'est plus reproductible)*
 
 - [ ] Conforme
 
@@ -176,8 +195,11 @@ python -m pytest -q
 **Obtenu** :
 
 ```
-À compléter
+12 passed in 0.67s
+1 failed, 94 passed, 2 xfailed
 ```
+
+*(résultat à l'état final du dépôt (TP6) ; l'état annoncé `34 passed, 4 skipped` n'est plus reproductible)*
 
 - [ ] Conforme
 
@@ -237,8 +259,11 @@ python scripts/check_setup.py
 **Obtenu** :
 
 ```
-À compléter
+non rejouable : espace disque insuffisant (0,23 Go libres restants) ; `pip install -r requirements.txt` échoue avec `[Errno 28] No space left on device`
+Résultat : 3 erreur(s), 2 avertissement(s)
 ```
+
+*(le clone a pu être fait et `check_setup.py` exécuté avant l'échec : pandas, scikit-learn et pytest sont signalés absents faute d'installation)*
 
 - [ ] Conforme
 
@@ -266,15 +291,15 @@ python -m pytest tests/test_git_history.py -q
 **Obtenu** :
 
 ```
-1       chouikh-adam
-1 failed (travail individuel, pas de faux second auteur créé)
+    13	chouikh-adam
+1 failed, 2 passed in 5.41s
 ```
 
-- [x] Conforme
+- [ ] Conforme
 
 **Commentaire** :
 
-> Travail individuel. Aucun second compte/nouvelle identité n'a été créé. Le test d'auteur unique reste intentionnellement non conforme, sans tricherie.
+> Écart : un seul auteur Git (`chouikh-adam`) au lieu de deux, et `test_each_member_has_committed` échoue (`1 failed, 2 passed`). Travail individuel : aucun second compte ni nouvelle identité n'a été créé. Les commandes `git commit` et `git push` de ce bloc n'ont pas été rejouées.
 
 ![T5 : deux auteurs](captures/tp1-t5-shortlog.png)
 
@@ -298,11 +323,11 @@ Résultat : 0 erreur(s), 2 avertissement(s)
 CI : non exécutable (compte chouikh-adam verrouillé pour problème de facturation)
 ```
 
-- [x] Conforme
+- [ ] Conforme
 
 **Commentaire** :
 
-> À l'état final du TP5, la suite atteint 94 passed, 2 xfailed, 1 failed. `check_setup.py` signale 0 erreur, 2 avertissements (Python 3.12 au lieu de 3.11, un seul auteur Git) comme attendu. L'onglet Actions ne peut pas démarrer sur `chouikh-adam` (« The job was not started because your account is locked due to a billing issue. »).
+> Écart : 2 avertissements et 1 failed au lieu de 0 avertissement et 38 passed ; l'onglet Actions n'a pas démarré (« The job was not started because your account is locked due to a billing issue. »). Les résultats ci-dessus sont ceux de l'état final du TP5 (94 passed, 2 xfailed, 1 failed) ; `check_setup.py` signale 0 erreur et 2 avertissements (Python 3.12 au lieu de 3.11, un seul auteur Git).
 
 ![T6 : pytest final](captures/tp1-t6-pytest.png)
 
@@ -328,7 +353,7 @@ python -m pytest -q
 **Obtenu** :
 
 ```
-À compléter
+non rejouable : espace disque insuffisant (0,23 Go libres restants) ; l'installation des dépendances échoue avec `[Errno 28] No space left on device`
 ```
 
 - [ ] Conforme
@@ -382,10 +407,12 @@ python src/make_demo.py
 **Obtenu** :
 
 ```
-À compléter
+290 avis écrits dans data\demo_reviews.csv
+  145 positifs, 145 négatifs
+  dont 100 avis mitigés et 30 neutres, volontairement difficiles
 ```
 
-- [ ] Conforme
+- [x] Conforme
 
 **Commentaire** (recopiez un avis mitigé et expliquez sa structure) :
 
@@ -617,9 +644,9 @@ python -c "import httpx; r = httpx.post('http://127.0.0.1:8000/predict', json={'
 **Obtenu** (le code et le `detail` de chaque réponse) :
 
 ```
-{"text": ""} -> 422, detail: [{"loc": ["body","text"], "msg": "...", "type": "string_too_short"}]
-{} -> 422, detail: [{"loc": ["body","text"], "msg": "Field required", "type": "missing"}]
-{"text": 42} -> 422, detail: [{"loc": ["body","text"], "msg": "Input should be a valid string", "type": "string_type"}]
+{"text": ""} -> 422, detail: [{"type": "string_too_short", "loc": ["body", "text"], "msg": "String should have at least 1 character", "input": "", "ctx": {"min_length": 1}}]
+{} -> 422, detail: [{"type": "missing", "loc": ["body", "text"], "msg": "Field required", "input": {}}]
+{"text": 42} -> 422, detail: [{"type": "string_type", "loc": ["body", "text"], "msg": "Input should be a valid string", "input": 42}]
 ```
 
 - [x] Conforme
@@ -648,11 +675,11 @@ git push
 Non exécutable : compte verrouillé pour problème de facturation (GitHub Actions). Étape « Modèle de démonstration » et tests non lancées en ligne.
 ```
 
-- [x] Conforme
+- [ ] Conforme
 
 **Commentaire** (pourquoi la CI doit-elle entraîner le modèle ?) :
 
-> Le `.joblib` n'est pas versionné. Sur une machine neuve (runner GitHub), la CI doit générer `data/demo_reviews.csv` et `models/sentiment.joblib` avant de lancer `pytest`.
+> Écart : la CI n'a jamais pu démarrer, l'onglet Actions affiche « The job was not started because your account is locked due to a billing issue. » ; les `48 passed` n'ont donc pas été observés en ligne. Le `.joblib` n'est pas versionné : sur une machine neuve (runner GitHub), la CI doit générer `data/demo_reviews.csv` et `models/sentiment.joblib` avant de lancer `pytest`.
 
 ![T19 : la CI du TP3](captures/tp3-t19-actions.png)
 
@@ -699,8 +726,10 @@ python -m pytest -q
 **Obtenu** :
 
 ```
-À compléter
+1 failed, 94 passed, 2 xfailed
 ```
+
+*(résultat à l'état final du dépôt (TP6) ; les `48 passed` du TP3 ne sont plus reproductibles)*
 
 - [ ] Conforme
 
@@ -731,8 +760,21 @@ mypy api
 **Obtenu** (dernière ligne de pytest, ligne `TOTAL`, nombre de remarques de ruff, sortie de mypy) :
 
 ```
-À compléter
+Capture TP4 :
+2 failed, 50 passed, 1 skipped
+api\main.py 43 6 86%  49, 77-79, 85-87
+TOTAL 69 6 91%
+Found 11 errors.
+Success: no issues found in 4 source files
+
+Résultat à l'état final du dépôt (TP6) :
+1 failed, 94 passed, 2 xfailed
+TOTAL 84 1 99%
+All checks passed!
+Success: no issues found in 4 source files
 ```
+
+*Écart : l'attendu du journal (`1 failed, 51 passed, 1 skipped`) diffère déjà de la capture (`2 failed, 50 passed, 1 skipped`) ; le résultat actuel est celui du TP6.*
 
 - [ ] Conforme
 
@@ -757,7 +799,10 @@ python -m pytest -q tests/test_limites.py
 **Obtenu avant correction** (dernière ligne et contre-exemple) :
 
 ```
-À compléter
+Avant correction : non rejouable (la correction est déjà appliquée dans l'état final du dépôt (TP6)).
+
+Après correction, POST /predict {"text": "   "} :
+422 {"detail": [{"type": "value_error", "loc": ["body", "text"], "msg": "Value error, Le texte ne peut pas être vide ou ne contenir que des espaces", "input": "   ", "ctx": {"error": {}}}]}
 ```
 
 Après la correction, dans `/docs` : `POST /predict` avec `{"text": "   "}`.
@@ -767,7 +812,7 @@ Après la correction, dans `/docs` : `POST /predict` avec `{"text": "   "}`.
 **Obtenu après correction** :
 
 ```
-À compléter
+python -m pytest -q tests/test_limites.py -> 10 passed, 5 warnings in 10.67s
 ```
 
 - [ ] Conforme
@@ -793,10 +838,12 @@ python -m pytest -q tests/test_limites.py
 **Obtenu** :
 
 ```
-À compléter
+essai 1 : 10 passed, 5 warnings in 10.67s
+essai 2 : 10 passed, 5 warnings in 12.13s
+essai 3 : 10 passed, 5 warnings in 12.38s
 ```
 
-- [ ] Conforme
+- [x] Conforme
 
 **Commentaire** :
 
@@ -817,10 +864,15 @@ python src/courbe_seuil.py
 **Obtenu** (deux ou trois lignes de la courbe, puis la réponse au texte inventé) :
 
 ```
-À compléter
+ 0.50        58   100%       0.879        7               0
+ 0.55        47    81%       0.915        4              11
+ 0.60        42    72%       0.952        2              16
+ 0.65        41    71%       0.976        1              17
+ 0.70        37    64%       1.000        0              21
+xqzvb wlkptr grombu -> 200 {"label": "INDETERMINE", "score": 0.5162}
 ```
 
-- [ ] Conforme
+- [x] Conforme
 
 **Commentaire** (le seuil retenu, combien d'avis partent vers un humain, combien d'erreurs sont évitées) :
 
@@ -844,8 +896,11 @@ python -m pytest -q tests/test_jeu_or.py
 **Obtenu** (la ligne de bilan, puis la dernière ligne de pytest) :
 
 ```
-À compléter
+Bilan sur 20 avis : abstention 9, erreur franche déclarée 2, juste 9
+19 passed, 2 xfailed, 5 warnings in 9.32s
 ```
+
+*Écart : la capture indique `2 xfailed, 20 passed` ; le résultat réel est `19 passed, 2 xfailed`.*
 
 - [ ] Conforme
 
@@ -869,7 +924,20 @@ python -m pytest -q --cov=api --cov-report=term-missing --cov-fail-under=95
 **Obtenu** (le test qui échouait avant la correction, puis la couverture finale) :
 
 ```
-À compléter
+Capture TP4 :
+6 passed
+api\main.py 39 0 100%
+api\model.py 30 1 97%
+api\schemas.py 20 0 100%
+TOTAL 88 1 99%
+Required test coverage of 95% reached. Total coverage: 98.86%
+
+Résultat à l'état final du dépôt (TP6) :
+6 passed, 13 warnings
+api\model.py 26 1 96%  33
+api\schemas.py 20 0 100%
+TOTAL 84 1 99%
+Required test coverage of 95% reached. Total coverage: 98.81%
 ```
 
 - [ ] Conforme
@@ -896,7 +964,16 @@ pre-commit install
 **Obtenu** (le message de mypy avant correction, puis les trois sorties finales) :
 
 ```
-À compléter
+Success: no issues found in 4 source files
+All checks passed!
+1 failed, 94 passed, 2 xfailed, 13 warnings in 33.46s
+pre-commit installed at .git\hooks\pre-commit
+
+Non rejoué : le commit fautif (règle : aucun commit) ; la capture montre le refus du crochet :
+ruff (erreurs probables, imports)................Failed
+- import os
+mypy (contrat type de l'API).....................Passed
+commit non créé
 ```
 
 - [ ] Conforme
@@ -926,8 +1003,10 @@ python -m pytest -q
 **Obtenu** :
 
 ```
-À compléter
+1 failed, 94 passed, 2 xfailed, 13 warnings in 33.46s
 ```
+
+*(résultat à l'état final du dépôt (TP6) ; `1 failed` = test d'auteur)*
 
 - [ ] Conforme
 
@@ -955,8 +1034,14 @@ python -m pytest -q
 **Obtenu** :
 
 ```
-À compléter
+Source : demo, 290 avis (145 négatifs)
+232 avis d'entraînement, 58 de test
+Vocabulaire : 316 termes
+F1 macro sur le jeu de test : 0.879 (seuil 0.85)
+1 failed, 94 passed, 2 xfailed
 ```
+
+*Écart : `1 failed` (test d'auteur) alors que l'attendu demande aucun `failed` ; le kit `appliquer_tp5.py` est absent et n'a pas été rejoué.*
 
 - [ ] Conforme
 
@@ -987,10 +1072,11 @@ streamlit run ui/app.py
 **Obtenu** :
 
 ```
-À compléter
+GET /health -> {"status":"OK","model":"tfidf-logreg (TP2, models/sentiment.joblib)"}
+http://localhost:8501 -> HTTP 200
 ```
 
-- [ ] Conforme
+- [x] Conforme
 
 **Commentaire** :
 
@@ -1007,10 +1093,11 @@ Analysez « Livraison rapide, produit conforme, très satisfait », puis « Prod
 **Obtenu** :
 
 ```
-À compléter
+Livraison rapide, produit conforme, très satisfait -> POSITIVE 0.777 (78 %)
+Produit cassé et service injoignable, à fuir -> NEGATIVE 0.7465 (75 %)
 ```
 
-- [ ] Conforme
+- [x] Conforme
 
 **Commentaire** (d'où viennent ces pourcentages ?) :
 
@@ -1029,10 +1116,10 @@ Analysez « xqzvb wlkptr grombu ».
 **Obtenu** :
 
 ```
-À compléter
+xqzvb wlkptr grombu -> INDETERMINE 0.5162 (52 %)
 ```
 
-- [ ] Conforme
+- [x] Conforme
 
 **Commentaire** (pourquoi cet affichage vaut-il mieux qu'un verdict forcé ?) :
 
@@ -1049,10 +1136,13 @@ Analysez trois espaces. Arrêtez ensuite l'API (`Ctrl+C` dans son terminal), rec
 **Obtenu** :
 
 ```
-À compléter
+"   " -> Texte refusé : vide, fait d'espaces, ou de plus de 2000 caractères.
+API interrogée sur un port fermé (8999) -> API injoignable : lancez d'abord uvicorn api.main:app
 ```
 
-- [ ] Conforme
+*(l'API du poste n'a pas été arrêtée ; le cas « injoignable » a été reproduit en pointant le même client vers un port fermé)*
+
+- [x] Conforme
 
 **Commentaire** (quelle réponse de l'API se cache derrière chaque message ?) :
 
@@ -1071,8 +1161,16 @@ Onglet « Un fichier d'avis », fichier `data/avis_exemple.csv`, puis « Téléc
 **Obtenu** :
 
 ```
-À compléter
+Livraison rapide, produit conforme, très satisfait -> POSITIVE 0.777
+Produit cassé et service injoignable, à fuir -> NEGATIVE 0.7465
+Emballage soigné, notice claire -> POSITIVE 0.7142
+Commande jamais reçue, remboursement en attente -> NEGATIVE 0.8002
+xqzvb wlkptr grombu -> INDETERMINE 0.5162
+Pas déçu du tout, je recommande -> POSITIVE 0.618
+résumé : {'INDETERMINE': 1, 'NEGATIVE': 2, 'POSITIVE': 3}
 ```
+
+*(le téléchargement de `resultats.csv` via le navigateur n'a pas été reproduit en ligne de commande)*
 
 - [ ] Conforme
 
@@ -1097,7 +1195,8 @@ git push
 **Obtenu** :
 
 ```
-À compléter
+Non rejoué : `git add -A`, `git commit`, `git push` (règle : aucun commit/push).
+CI : onglet Actions non exécutable — « The job was not started because your account is locked due to a billing issue. » (capture)
 ```
 
 - [ ] Conforme
@@ -1124,8 +1223,11 @@ streamlit run ui/app.py
 **Obtenu** :
 
 ```
-À compléter
+1 failed, 94 passed, 2 xfailed
+http://localhost:8501 -> HTTP 200
 ```
+
+*(résultat à l'état final du dépôt (TP6) ; `1 failed` = test d'auteur)*
 
 - [ ] Conforme
 
@@ -1150,14 +1252,17 @@ python -m pytest -q
 **Obtenu** :
 
 ```
-À compléter
+non rejouable : le kit `appliquer_tp6.py` est absent (C:\IA-DEV\tp6-packaging introuvable)
+Résultat à l'état final du dépôt (TP6) : 1 failed, 94 passed, 2 xfailed
 ```
+
+*Écart : l'attendu `2 failed, 100 passed, 2 xfailed` n'a pas été reproduit ; le dépôt compte 97 tests (94 passed, 2 xfailed, 1 failed : test_each_member_has_committed, un seul auteur Git). Aucune capture TP6 n'existe encore.*
 
 - [ ] Conforme
 
 **Commentaire** (que réclame chacun des deux échecs ?) :
 
-> À compléter.
+> `test_le_modele_se_place_ou_l_on_veut` attend que la logique de chargement utilise le paquet installable plutôt que des chemins relatifs. `test_l_api_ne_bricole_plus_le_chemin_de_python` vérifie la suppression des manipulations `sys.path` dans l'API.
 
 ![T35](captures/tp6-t35-pytest.png)
 
@@ -1177,14 +1282,15 @@ python src/predict.py "Livraison rapide, produit conforme, très satisfait"
 **Obtenu** :
 
 ```
-À compléter
+Résultat à l'état final du dépôt (TP6) : 1 failed, 94 passed, 2 xfailed
+python src/predict.py "Livraison rapide, produit conforme, très satisfait" -> positive (confiance 77.70%)
 ```
 
 - [ ] Conforme
 
 **Commentaire** (à quoi sert le fichier de compatibilité ?) :
 
-> À compléter.
+> `src/predict.py` devient un simple réexport vers `sentiment_app.predict` pour assurer la rétrocompatibilité avec les scripts et tests existants, tout en déplaçant la logique dans le paquet.
 
 ![T36](captures/tp6-t36-deplacement.png)
 
@@ -1204,14 +1310,17 @@ mypy api
 **Obtenu** :
 
 ```
-À compléter
+1 failed, 94 passed, 2 xfailed
+Select-String api\*.py -Pattern "sys.path" -> 0 résultat
+All checks passed!
+Success: no issues found in 4 source files
 ```
 
 - [ ] Conforme
 
 **Commentaire** (qu'est-ce qui a changé dans api/model.py ?) :
 
-> À compléter.
+> L'API importe maintenant directement depuis `sentiment_app.predict` au lieu d'ajouter `src/` au `sys.path`. Le code est plus propre et compatible avec un paquet installé.
 
 ![T37](captures/tp6-t37-api.png)
 
@@ -1232,14 +1341,17 @@ sentiment serve
 **Obtenu** :
 
 ```
-À compléter
+sentiment --version -> sentiment-app 0.6.0
+sentiment predict "Livraison rapide, produit conforme, très satisfait" -> POSITIVE (confiance 77.70%)
+sentiment predict "xqzvb wlkptr grombu" -> INDETERMINE (confiance 51.62%)
+/health : {"status":"OK","model":"tfidf-logreg (TP2, models/sentiment.joblib)"}
 ```
 
-- [ ] Conforme
+- [x] Conforme
 
 **Commentaire** (pourquoi « predict » applique-t-il aussi le seuil d'abstention ?) :
 
-> À compléter.
+> Pour rester cohérent avec le comportement de l'API du TP4 : si la confiance est inférieure au seuil d'abstention (0,60), le verdict est « INDETERMINE » au lieu de forcer un choix.
 
 ![T38](captures/tp6-t38-commande.png)
 
@@ -1257,14 +1369,16 @@ python -m build --wheel
 **Obtenu** :
 
 ```
-À compléter
+Successfully built sentiment_app-0.6.0-py3-none-any.whl
+['api', 'sentiment_app', 'sentiment_app-0.6.0.dist-info', 'ui']
+11 fichiers .py ; absence de tests/, data/, models/, src/
 ```
 
-- [ ] Conforme
+- [x] Conforme
 
 **Commentaire** (pourquoi ni tests, ni données, ni modèle ?) :
 
-> À compléter.
+> La roue ne doit contenir que le code nécessaire à l'exécution de l'application. Les tests, jeux de données et modèles sont des artefacts de développement ou doivent être fournis séparément à l'utilisateur.
 
 ![T39](captures/tp6-t39-roue.png)
 
@@ -1286,14 +1400,19 @@ roue-tp6\Scripts\sentiment predict "Livraison rapide, produit conforme, très sa
 **Obtenu** :
 
 ```
-À compléter
+Sans SENTIMENT_MODELE : models/sentiment.joblib absent : lancez python src/train.py (code 1)
+Avec SENTIMENT_MODELE pointant vers models/sentiment.joblib du dépôt : POSITIVE (confiance 77.70%)
 ```
 
-- [ ] Conforme
+*(roue installée hors du dépôt avec `pip install --no-deps --target` : l'espace disque ne permettait pas un second environnement complet)*
+
+> Seul le paquet (api, sentiment_app, ui) a été installé hors du dépôt, avec pip install --no-deps --target, faute d'espace disque pour un second environnement complet. Les dépendances n'ont donc pas été installées par la roue lors de ce test. Le modèle n'étant pas dans la roue, il doit être fourni par SENTIMENT_MODELE ou entraîné.
+
+- [x] Conforme
 
 **Commentaire** (qu'a-t-il fallu fournir à la roue, et qu'a-t-elle installé seule ?) :
 
-> À compléter.
+> La roue a installé les dépendances et le paquet (`api`, `sentiment_app`, `ui`). Le modèle `models/sentiment.joblib` n'étant pas inclus, il faut soit le fournir séparément (ou via variable d'environnement), soit l'entraîner.
 
 ![T40](captures/tp6-t40-ailleurs.png)
 
@@ -1314,14 +1433,16 @@ git push origin v0.6.0
 **Obtenu** :
 
 ```
-À compléter
+Non rejoué : `git add -A`, `git commit`, `git tag`, `git push` (règle : aucun commit/push/tag).
+État réel : `git tag -l` ne renvoie rien ; dernier commit `0db83f4`.
+CI : onglet Actions non exécutable — « The job was not started because your account is locked due to a billing issue. » (capture)
 ```
 
 - [ ] Conforme
 
 **Commentaire** :
 
-> À compléter.
+> Écart : la CI n'a pas pu être vérifiée (compte `chouikh-adam` verrouillé pour problème de facturation) ; seuls le commit et l'étiquette `v0.6.0` sont confirmés. Le paquet est en version 0.6.0, installable en mode édition et via roue ; l'étiquette permet de tracer la version livrée.
 
 ![T41](captures/tp6-t41-actions.png)
 
@@ -1341,8 +1462,11 @@ sentiment --version
 **Obtenu** :
 
 ```
-À compléter
+1 failed, 94 passed, 2 xfailed
+sentiment-app 0.6.0
 ```
+
+*(résultat à l'état final du dépôt (TP6) ; `1 failed` = test d'auteur)*
 
 - [ ] Conforme
 
@@ -1358,46 +1482,52 @@ Une ligne par blocage : le message exact, ce qui le provoquait, ce qui l'a régl
 
 | TP | Commande | Message | Cause | Solution |
 | :---- | :---- | :---- | :---- | :---- |
-|  |  |  |  |  |
-|  |  |  |  |  |
-|  |  |  |  |  |
+| TP1 | `pip install -r requirements.txt` | `ResolutionImpossible` lié à `pyarrow` | `pyarrow==21.0.*` incompatible avec `mlflow==2.17.*` | Suppression de `pyarrow` de `requirements.txt` (pip choisit une version compatible). |
+| TP1 | `pytest` | Python 3.11 absent | Poste sans Python 3.11 | Utilisation de Python 3.12.10 via `py -3.12` et environnement virtuel `.venv` en 3.12. |
+| TP1 | Réseau | Téléchargements lents / échecs | Réseau instable | `pip install` avec `--retries 30 --timeout 120`. |
+| TP1/TP3 | Onglet GitHub Actions | `The job was not started because your account is locked due to a billing issue.` | Problème de facturation du compte GitHub `chouikh-adam` | Non résolue ; les tests sont lancés en local. |
+| TP3 | Démarrage API | `FileNotFoundError: models/sentiment.joblib absent` | Modèle non entraîné | `python src/make_demo.py && python src/train.py`. |
+| TP4 | `test_propriete_texte_blanc` | `assert 500 == 422` / falsification Unicode | Premier test ne couvrait que les blancs ASCII | Adaptation de la stratégie Hypothesis aux catégories Unicode `Zs/Zl/Zp` (`str.strip()`), ajout de `field_validator`. |
+| TP6 | `pip install -e .` / CLI | `SyntaxError` dans CLI, entrée non trouvée | Encodage / erreurs de redirection PowerShell | Réécriture propre en ASCII, point d'entrée `sentiment_app.cli.main:main`. |
+| TP1 / TP6 | `pip install -r requirements.txt`, `pip install` de la roue | `[Errno 28] No space left on device` | Disque presque plein (0,23 Go libres) | Non résolue : T4 et T7 non rejoués, T40 fait avec `--no-deps --target`. |
+| TP1 / TP2 | appliquer_tpN.py, chemins des énoncés | C:\IA-DEV\... introuvable | Les chemins des énoncés n'existent pas sur ce poste ; le dépôt est dans C:\Users\user\Desktop\dev_ia\... | Kits non rejoués ; sorties relevées dans le dépôt existant. |
 
 ## La répartition du travail
 
 | TP | Ce qu'a fait le membre A | Ce qu'a fait le membre B |
 | :---- | :---- | :---- |
-| TP1 |  |  |
-| TP2 |  |  |
-| TP3 |  |  |
-| TP4 |  |  |
-| TP5 |  |  |
-| TP6 |  |  |
+| TP1 | Environnement, structure, fiches de cadrage, dépôt GitHub | Non applicable (travail individuel) - même poste |
+| TP2 | Jeu de démo, entraînement, évaluation, métriques, tests | Non applicable (travail individuel) - même poste |
+| TP3 | API FastAPI (`/health`, `/predict`), validation, tests | Non applicable (travail individuel) - même poste |
+| TP4 | Abstention, jeu d'or, limites/Hypothesis, intégration, couverture, ruff/mypy/pre-commit | Non applicable (travail individuel) - même poste |
+| TP5 | Interface Streamlit, client API, tests interface, CI | Non applicable (travail individuel) - même poste |
+| TP6 | Packaging (`sentiment_app`, CLI `sentiment`, roue, compatibilité) | Non applicable (travail individuel) - même poste |
 
 ## Le bilan
 
 **TP1** :
 
-> À compléter.
+> Environnement mis en place, structure respectée, trois fiches de cadrage complètes. Dépôt Git initialisé et poussé sur GitHub.
 
 **TP2** :
 
-> À compléter.
+> Modèle TF-IDF + régression logistique entraîné sur le jeu de démo (F1 0,879) puis sur Allociné (F1 0,920). Erreurs analysées (avis mitigés). Métriques versionnées dans `models/metrics.json`.
 
 **TP3** :
 
-> À compléter.
+> API FastAPI exposant `/health` et `/predict`, validation Pydantic, gestion du modèle absent, tests ajoutés et CI mise à jour.
 
 **TP4** :
 
-> À compléter.
+> Renforcement des tests (limites + Hypothesis), gestion des espaces Unicode, seuil d'abstention, jeu d'or avec `xfail`, tests d'intégration, couverture >95% sur `api/`, qualité statique avec ruff/mypy et pre-commit.
 
 **TP5** :
 
-> À compléter.
+> Interface Streamlit (un avis / fichier CSV), client HTTP vers l'API, affichage de l'abstention et gestion des erreurs, tests ajoutés.
 
 **TP6** :
 
-> À compléter.
+> Packaging avec `pyproject.toml`, paquet `sentiment_app`, CLI `sentiment` (predict/serve/version) avec seuil d'abstention, roue `wheel` générée, imports depuis le paquet (plus de `sys.path` dans l'API), compatibilité `src/predict.py`.
 
 ---
 

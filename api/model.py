@@ -3,14 +3,10 @@
 L'API n'entraîne rien et ne connaît pas scikit-learn : elle appelle la fonction
 predict() de src/predict.py, qui charge models/sentiment.joblib une seule fois.
 """
-import sys
-from pathlib import Path
 from typing import Literal, TypedDict
 
-RACINE = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(RACINE / "src"))
-from predict import charger_modele  # noqa: E402  (fonctions du TP2)
-from predict import predict as _predict  # noqa: E402
+from sentiment_app.predict import charger_modele
+from sentiment_app.predict import predict as _predict
 
 SEUIL_ABSTENTION = 0.60  # sous cette confiance, le modèle préfère s'abstenir (TP4, étape C)
 
