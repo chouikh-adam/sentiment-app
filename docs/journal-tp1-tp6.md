@@ -1419,11 +1419,12 @@ Avec SENTIMENT_MODELE pointant vers models/sentiment.joblib du dépôt : POSITIV
 ### T41 · Version, étiquette, push
 
 ```powershell
-git add -A
-git commit -m "Semaine 6 : paquet installable, version 0.6.0"
+git add sentiment_app pyproject.toml api/model.py src/predict.py predict.py docs/journal-tp1-tp6.md
+git commit -m "TP6 : paquet installable sentiment_app 0.6.0, journal"
 git tag -a v0.6.0 -m "TP6 : paquet installable"
-git push
+git push origin main
 git push origin v0.6.0
+git ls-remote --tags origin
 ```
 
 &nbsp;
@@ -1433,18 +1434,26 @@ git push origin v0.6.0
 **Obtenu** :
 
 ```
-Non rejoué : `git add -A`, `git commit`, `git tag`, `git push` (règle : aucun commit/push/tag).
-État réel : `git tag -l` ne renvoie rien ; dernier commit `0db83f4`.
-CI : onglet Actions non exécutable — « The job was not started because your account is locked due to a billing issue. » (capture)
+[main 3275626] TP6 : paquet installable sentiment_app 0.6.0, journal
+ 9 files changed, 367 insertions(+), 135 deletions(-)
+v0.6.0
+   0db83f4..3275626  main -> main
+ * [new tag]         v0.6.0 -> v0.6.0
+c24efbeb88ff7457c344f9177f8fd3ff53ad339b	refs/tags/v0.6.0
+3275626c9e2b690e787c39a93e5bfe0c7d558aa2	refs/tags/v0.6.0^{}
+
+État après opérations : git log --oneline -3 -> 3275626 TP6 : paquet installable sentiment_app 0.6.0, journal / 0db83f4 Journal : TP1-TP5 renseignés (travail individuel) / 7d64362 Nettoyage : uniquement les livrables et fichiers exiges
+git tag -l -> v0.6.0
 ```
 
 - [ ] Conforme
 
 **Commentaire** :
 
-> Écart : la CI n'a pas pu être vérifiée (compte `chouikh-adam` verrouillé pour problème de facturation) ; seuls le commit et l'étiquette `v0.6.0` sont confirmés. Le paquet est en version 0.6.0, installable en mode édition et via roue ; l'étiquette permet de tracer la version livrée.
+> Écart : la CI n'a pas pu être vérifiée (compte chouikh-adam verrouillé pour facturation). Le commit 3275626 et l'étiquette v0.6.0 ont été créés et poussés ; git ls-remote --tags origin montre bien v0.6.0. L'étiquette n'a pas pu être contrôlée sur GitHub Actions (« The job was not started because your account is locked due to a billing issue. »).
 
 ![T41](captures/tp6-t41-actions.png)
+
 
 ### Membre B, après le TP6
 
