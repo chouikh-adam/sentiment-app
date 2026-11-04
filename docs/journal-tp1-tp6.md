@@ -11,7 +11,8 @@
 
 > Travail réalisé seul par Adam Chouikh : les tâches « membre A » et « membre B » ont été effectuées par le même étudiant. Les captures « membre B » sont obtenues après `git pull` sur le même poste, et les blocs prévus pour le binôme sont marqués « Non applicable / travail individuel ».
 
-> **État du dépôt** : version déposée avant la date limite, journal partiellement complété. Les commentaires marqués « À compléter » et les captures TP6 (T35 à T41, membre B) seront ajoutés dans une version ultérieure. Les sorties présentes sont celles observées sur mon poste. Les blocs T4 et T7 (TP1) n'ont pas pu être rejoués faute d'espace disque, et T35 (TP6) faute du kit appliquer_tp6.py, absent du poste.
+> **État du dépôt** : version déposée avant la date limite, journal partiellement complété. Reste à ajouter : la capture T41 (CI inexécutable, compte GitHub verrouillé pour facturation) et les commentaires marqués « À compléter ». Les blocs T4 et T7 (TP1) n'ont pas pu être rejoués faute d'espace disque, et T35 (TP6) faute du kit appliquer_tp6.py, absent du poste.
+> Les sorties présentes sont celles observées sur mon poste.
 
 ## Comment remplir ce journal
 
@@ -1452,7 +1453,9 @@ git tag -l -> v0.6.0
 
 > Écart : la CI n'a pas pu être vérifiée (compte chouikh-adam verrouillé pour facturation). Le commit 3275626 et l'étiquette v0.6.0 ont été créés et poussés ; git ls-remote --tags origin montre bien v0.6.0. L'étiquette n'a pas pu être contrôlée sur GitHub Actions (« The job was not started because your account is locked due to a billing issue. »).
 
-![T41](captures/tp6-t41-actions.png)
+Capture non disponible : la page Actions n'a pas pu être capturée.
+
+<!-- ![T41](captures/tp6-t41-actions.png) -->
 
 
 ### Membre B, après le TP6
@@ -1480,6 +1483,8 @@ sentiment-app 0.6.0
 - [ ] Conforme
 
 ![TP6 : poste du membre B](captures/tp6-membre-b.png)
+
+Capture composée de deux captures du même terminal.
 
 > Les commandes de ce TP, leurs notions préalables et les points d'attention (ordre de T36, paquet `build`) sont expliqués dans l'**annexe H**, à la fin de ce journal.
 
